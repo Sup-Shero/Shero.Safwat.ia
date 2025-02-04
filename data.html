@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+            padding: 20px;
+        }
+
+        .data-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 800px;
+            animation: slideUp 0.5s ease;
+        }
+
+        h2 {
+            color: #2d3436;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table td:first-child {
+            font-weight: 600;
+            color: #2d3436;
+            width: 30%;
+        }
+
+        .back-btn {
+            background: #4ecdc4;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="data-container">
+        <h2><i class="fas fa-user-check"></i> Registration Details</h2>
+        <table class="data-table">
+            <tr>
+                <td>Full Name:</td>
+                <td id="data-name">Loading...</td>
+            </tr>
+            <tr>
+                <td>Email Address:</td>
+                <td id="data-email">Loading...</td>
+            </tr>
+            <tr>
+                <td>Phone Number:</td>
+                <td id="data-phone">Loading...</td>
+            </tr>
+        </table>
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            <i class="fas fa-arrow-left"></i> Back to Registration
+        </button>
+    </div>
+
+    <script>
+        // Retrieve data from localStorage
+        const userData = JSON.parse(localStorage.getItem('userRegistration'));
+        
+        if(userData) {
+            document.getElementById('data-name').textContent = userData.name;
+            document.getElementById('data-email').textContent = userData.email;
+            document.getElementById('data-phone').textContent = userData.phone;
+        } else {
+            document.querySelector('.data-table').innerHTML = `
+                <tr><td colspan="2" style="text-align:center;color:#ff6b6b;">
+                    No registration data found!
+                </td></tr>
+            `;
+        }
+    </script>
+</body>
+</html>
