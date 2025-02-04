@@ -197,15 +197,23 @@
             e.preventDefault();
             
             const userData = {
+                id: Date.now(),
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value
+                phone: document.getElementById('phone').value,
+                timestamp: new Date().toISOString()
             };
 
-            // Store data in localStorage
-            localStorage.setItem('userRegistration', JSON.stringify(userData));
+            // Get existing data or initialize empty array
+            const existingData = JSON.parse(localStorage.getItem('allRegistrations')) || [];
             
-            // Redirect to second page
+            // Add new registration
+            existingData.push(userData);
+            
+            // Save back to localStorage
+            localStorage.setItem('allRegistrations', JSON.stringify(existingData));
+            
+            // Redirect to data page
             window.location.href = 'data.html';
         });
     </script>
